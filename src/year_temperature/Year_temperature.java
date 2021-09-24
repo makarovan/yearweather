@@ -22,30 +22,57 @@ public class Year_temperature {
     }
     
     public static void main(String[] args) {
-        int min = -20, max = 20;
-        int[][] YearsWeather = new int[12][];
-        YearsWeather[0] = new int[31];
-        YearsWeather[1] = new int[28];
-        YearsWeather[2] = new int[31];
-        YearsWeather[3] = new int[30];
-        YearsWeather[4] = new int[31];
-        YearsWeather[5] = new int[30];
-        YearsWeather[6] = new int[31];
-        YearsWeather[7] = new int[31];
-        YearsWeather[8] = new int[30];
-        YearsWeather[9] = new int[31];
-        YearsWeather[10] = new int[30];
-        YearsWeather[11] = new int[31];
-        
         Random random = new Random();
-        for (int i = 0; i < YearsWeather.length; i++) {
-            System.out.println(Months.values()[i]);
+        int min = -20, max = 20, dayInMonth = 0;
+        int[][] YearsWeather = new int[12][];
+        System.out.print("           ");
+        float average_sum=0;
+        //номер столбца/дня
+        for (int i = 0; i < 31; i++) {
+            System.out.printf("%4d", i+1);
+            System.out.print("|");
+        }
+        System.out.println("");//чтобы январь не улетел лул
+        
+        for (int i = 0; i < 12; i++) {
+            switch (i) {
+                case 0: min = -20; max = -5; dayInMonth = 31; break;
+                case 1: min = -20; max = 0; dayInMonth = 28; break;
+                case 2: min = -15; max = 5; dayInMonth = 31; break;
+                case 3: min = -10; max = 10; dayInMonth = 30; break;
+                case 4: min = -5; max = 15; dayInMonth = 31; break;
+                case 5: min = 5; max = 20; dayInMonth = 30; break;
+                case 6: min = 10; max = 30; dayInMonth = 31; break;
+                case 7: min = 10; max = 25; dayInMonth = 31; break;
+                case 8: min = 0; max = 20; dayInMonth = 30; break;
+                case 9: min = -5; max = 10; dayInMonth = 31; break;
+                case 10: min = -10; max = 5; dayInMonth = 30; break;
+                case 11: min = -15; max = 0; dayInMonth = 31; break;
+                
+            }
+            //выставляем название месяца в начало
+            
+            System.out.printf("%9s: ",Months.values()[i]);//9s кол-во отступов перед словом
+            YearsWeather[i] = new int[dayInMonth];//выставление кол-ва дней в месяц
+            //заполняем дни температурой согласно месяцу
             for (int j = 0; j < YearsWeather[i].length; j++) {
                 YearsWeather[i][j] = random.nextInt(max - min + 1)+min;
                 System.out.printf("%4d",YearsWeather[i][j]);
+                System.out.print("|");
+                average_sum+=YearsWeather[i][j];
+                
             }
-            System.out.println("");
+            //average temp
+            System.out.printf("%2.2f",average_sum/YearsWeather[i].length);
+            average_sum=0;
+            System.out.println();//для переноса месяца на новую строку
+            
         }
+        
+       
+        
+        
+
         
         
         
